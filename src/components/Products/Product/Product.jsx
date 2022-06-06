@@ -1,6 +1,19 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 const Product = () => {
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    axios({
+      URL: "http://localhost:8080/products",
+      method: "GET",
+    })
+    .then((result) => {
+      setData(result.data);
+      console.log(result.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[]);
   // Note: this id should come from api
   const product = { id: 1 };
   return (
